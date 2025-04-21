@@ -1,12 +1,19 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faCoffee } from '@fortawesome/free-solid-svg-icons';
+import { FormsModule } from "@angular/forms";
+import { RouterModule } from '@angular/router';
+import { HttpClient } from "@angular/common/http";
+import { headerComponent } from "./shared/components/header/header.component";
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [FormsModule, RouterModule, headerComponent, FontAwesomeModule],
+  providers: [HttpClient],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css'],
 })
+
 export class AppComponent {
-  title = 'prueba';
-}
+  faCoffe = faCoffee;
+} 

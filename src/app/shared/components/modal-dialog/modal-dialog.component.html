@@ -1,0 +1,28 @@
+<div *ngIf="isOpen" class="modal-overlay" (keydown.escape)="close()" tabindex="0">
+    <div class="modal-content">
+      <div class="image-container">
+        <img src="https://image.tmdb.org/t/p/w500/{{ pelicula.poster_path }}" alt="">
+      </div>
+      <div class="info-container">
+        <h1>{{ pelicula.original_title }}</h1>
+        <p>{{ pelicula.overview }}</p>
+        <div class="tags-container">
+            <div class="tag">
+                <img src="calendar-day.png" alt="">
+                <p>{{ pelicula.release_date }}</p>
+            </div>
+            <div class="tag">
+                <img src="popularity.png" alt="">
+                <p>{{ pelicula.popularity }}</p>
+            </div>
+        </div>
+        <h2>Write a review:</h2>
+        <div class="review-container">
+            <textarea name="" id="" cols="30" rows="10"></textarea>
+            <button><img src="copy.png" alt=""></button>
+        </div>
+    </div>
+    <button (click)="close()">Cerrar Modal</button>
+  </div>
+</div>
+  

@@ -1,0 +1,111 @@
+.modal-overlay{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100dvw;
+    height: 100dvh;
+    backdrop-filter: blur(20px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content{
+    position: relative;
+    background-color: var(--secondary-color);
+    padding: 20px;
+    box-sizing: border-box;
+    border-radius: 10px;
+    filter: drop-shadow(-3px 5px 22px #000000);
+    display: flex;
+    padding: 20px;
+    width: 60%;
+    gap: 20px;
+    box-sizing: border-box;
+}
+
+.modal-content button{
+    background-color: red;
+    border: none;
+    position: absolute;
+    right: 20px;
+    padding: 10px;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.modal-content button:hover{
+    background-color: rgb(255, 128, 128);
+}
+
+.image-container{
+    width: 30%;
+}
+
+.image-container img{
+    width: 100%;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+.info-container{
+    width: 70%;
+}
+
+.tags-container{
+    display: flex;
+    gap: 10px;
+}
+
+.tag{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: rgb(214, 255, 255);
+    padding: 10px;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.tag img{
+    width: 12px;
+    height: 12px;
+}
+
+.tag p{
+    margin: 0;
+    font-size: 12px;
+}
+
+.review-container{
+    position: relative;
+    display: flex;
+    background-color: #dfdfdf;
+    border-radius: 10px;
+}
+
+.review-container textarea{
+    width: 100%;
+    padding: 10px;
+    background-color: transparent;
+    border-radius: 10px;
+    border: none;
+}
+
+.review-container button{
+    background-color: rgb(255, 255, 255);
+    position: absolute;
+    right: 10px;
+    border: 1px solid black;
+    top: 10px;
+    padding: 05px;
+    border-radius: 5px;
+    cursor: pointer;
+    color: black;
+}
+
+.review-container button img{
+    width: 15px;
+    height: 15px;
+}

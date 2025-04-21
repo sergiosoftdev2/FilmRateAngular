@@ -1,0 +1,19 @@
+<input type="text" class="searchContainer">
+
+<div class="movie-card-container">
+    <app-movie-card 
+        *ngFor="let pelicula of discoverPeliculas"
+        [titulo] = "pelicula.original_title"  
+        [descripcion] = "pelicula.overview"
+        [poster] = "pelicula.poster_path"
+        (click)="openModal(pelicula)"
+        (keydown.escape)="closeModal()" 
+        tabindex="0"
+    ></app-movie-card>
+</div>
+
+<app-modal-dialog
+    [isOpen] = "isOpenModal"
+    (closeModal) = "closeModal()"
+    [pelicula] = "peliculaSeleccionada"
+></app-modal-dialog>

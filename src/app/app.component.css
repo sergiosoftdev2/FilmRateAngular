@@ -1,0 +1,32 @@
+*{
+  font-family: 'Arial', sans-serif;
+}
+
+.main-container{
+  width: 70dvw;
+  margin: 0 auto;
+  box-sizing: border-box;
+  margin-top: 50px;
+}
+
+.form-container{
+  display: flex;
+  gap: 20px;
+}
+
+
+button{
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  width: 20%;
+  background-color: rgb(93, 93, 255);
+  border: 1px solid #c7c7c7;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:hover{
+  background-color: rgb(70, 70, 255);
+}

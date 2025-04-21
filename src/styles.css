@@ -1,1 +1,17 @@
-/* You can add global styles to this file, and also import other style files */
+:root{
+
+    --secondary-color: #373737;
+    --background-color: #202020;
+
+}
+
+body{
+    background-color: #202020;
+    color: white;
+}
+
+.icon{
+    color: white;
+    width: 20px;
+    height: 20px;
+}

@@ -1,10 +1,19 @@
 :root{
 
-    --secondary-color: #373737;
+    --paragraph-color: #cfcfcf;
+    --terciary-color: #303030;;
+    --secondary-color: #3a3a3a;
+    --primary-color: #363636;
     --background-color: #202020;
 
 }
 
+*{
+    font-family: "Poppins", sans-serif;
+    scrollbar-width: none;
+    scrollbar-color: transparent;
+}
+  
 body{
     background-color: #202020;
     color: white;

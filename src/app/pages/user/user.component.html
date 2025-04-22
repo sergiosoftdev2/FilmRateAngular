@@ -1,0 +1,49 @@
+<h1>Hola Sergio! 👋</h1>
+
+<section class="userProfile">
+    <div class="profilePic">
+        <img src="/default.jpg" alt="">
+    </div>
+    <div class="profileInfo">
+        <div style="display: flex; align-items: center; gap: 5px;">
+            <h2>Sergio García López</h2>
+            <div class="infoButtons">
+                <button class="infoProfileButton">
+                    <img src="/follow.png" alt="">
+                </button>
+                <button class="infoProfileButton block">
+                    <img src="/block.png" alt="">
+                </button>
+            </div>
+        </div>
+        <h3>&#64;sergiigarlo</h3>
+        <p>Desde clásicos inmortales hasta joyas ocultas que nadie conoce. Aquí comparto mis películas favoritas, las que me hicieron pensar… y las que simplemente me hicieron pasar un buen rato 🍿.</p>
+    </div>
+</section>
+
+<section>
+    <h2>Películas Favoritas</h2>
+    <div class="corridor">
+        <div class="movieCard" *ngFor="let pelicula of misPeliculas">
+            <img src="https://image.tmdb.org/t/p/w500/{{pelicula.poster_path}}" alt="">
+        </div>
+    </div>
+</section>
+
+<section>
+    <h2>Películas Criticadas</h2>
+    <div class="corridor">
+        <div class="movieCard" *ngFor="let pelicula of misPeliculas">
+            <img src="https://image.tmdb.org/t/p/w500/{{pelicula.poster_path}}" alt="">
+        </div>
+    </div>
+</section>
+
+<section>
+    <h2>Watchlist</h2>
+    <div class="corridor">
+        <div class="movieCard" *ngFor="let pelicula of misPeliculas">
+            <img src="https://image.tmdb.org/t/p/w500/{{pelicula.poster_path}}" alt="">
+        </div>
+    </div>
+</section>

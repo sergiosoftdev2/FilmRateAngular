@@ -17,5 +17,9 @@ export class ApiService {
     let url = 'https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc';
     return this.http.get(url, { headers: this.headers });  // Asegúrate de enviar las cabeceras correctamente
   }
-  
+
+  public buscarPeliculas(query: string) {
+    const url = `https://api.themoviedb.org/3/search/movie?query=${query}&include_adult=false&language=en-US&page=1`;
+    return this.http.get(url, { headers: this.headers });  // Asegúrate de enviar las cabeceras correctamente
+  }
 }

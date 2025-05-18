@@ -50,11 +50,10 @@ export class registerComponent {
             imagen: this.imagen
         }
 
-        console.log(usuario);
-
         this.apiService.register(usuario).subscribe(
             (data: any) => {
                 this.apiService.sessionSetter(data.userId);
+                this.Router.navigate(['/user']);
             },
             (error) => {
                 if (error.status === 409) {

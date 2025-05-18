@@ -1,64 +1,55 @@
 
-import { CommonModule, NgForOf } from '@angular/common';
-import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ApiService } from '../../services/api.service';
-import { ModalDialogComponent } from '../../shared/components/modal-dialog/modal-dialog.component';
-import { MovieCard } from '../../shared/components/movieCard/movieCard.component';
-import { FormsModule } from '@angular/forms';
+import { register } from 'swiper/element/bundle'
+import { RouterLink } from '@angular/router';
 
+register();
 
 @Component({
-    selector: 'app-home',
-    imports: [CommonModule, ModalDialogComponent, MovieCard, NgForOf, FormsModule],
+    selector: 'app-login',
+    imports: [CommonModule, RouterLink],
     standalone: true,
     templateUrl: './home.component.html',
-    styleUrls: ['./home.component.css']
+    styleUrls: ['./home.component.css'],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 
 export class homeComponent {
 
-    public buscadorPeliculas = "";
-    public discoverPeliculas: any;
-    public isOpenModal: boolean = false;
+  constructor(private apiService: ApiService) { }
 
-    constructor(private apiService: ApiService) { }
+  peliculasPopulares: any[] = [];
+  peliculasMejorValoradas: any[] = [];
+  proximosEstrenos: any[] = [];
+  
+  ngOnInit() {
 
-    public title = 'mi Prueba';
-    public nombrePelicula = "";
-    public peliculaSeleccionada: any;
-
-    public cambiarTitulo() {
-        this.title = this.title === "mi Prueba" ? "Hola Mundo!" : "mi Prueba";
-    }
-
-    ngOnInit() {
-        this.apiService.getPeliculas().subscribe((data: any) => {
-            this.discoverPeliculas = data.results;
-        })
-
-        this.apiService.getProfile().subscribe((data: any) => {
-            console.log(data);
-        })
-
-    }
-
-    closeModal() {
-        this.isOpenModal = false;
-    }
-
-    openModal(pelicula: any) {
-        this.isOpenModal = true;
-        this.peliculaSeleccionada = pelicula;
-    }
-
-    buscarPelicula(){
-        if(this.buscadorPeliculas.length > 0) {
-            this.apiService.buscarPeliculas(this.buscadorPeliculas).subscribe((data: any) => {
-                this.discoverPeliculas = data.results;
-            });
-        }else{
-            this.ngOnInit();
+    this.apiService.getPeliculasPopulares().subscribe((data: any) => {
+      data.results.forEach((element: any) => {
+        if(element){
+          this.peliculasPopulares.push(element);
         }
-    }
+      });
+    })
+
+    this.apiService.getPeliculasMejorValoradas().subscribe((data: any) => {
+      data.results.forEach((element: any) => {
+        if(element){
+          this.peliculasMejorValoradas.push(element);
+        }
+      });
+    })
+
+    this.apiService.getEstrenos().subscribe((data: any) => {
+      data.results.forEach((element: any) => {
+        if(element){
+          this.proximosEstrenos.push(element);
+        }
+      });
+    })
+
+  }
 
 }

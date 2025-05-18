@@ -58,3 +58,7 @@ body{
     color: rgb(190, 0, 0);
     font-size: 12px;
 }
+
+.backdrop{
+    backdrop-filter: blur(100px);
+}

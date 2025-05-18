@@ -1,25 +1,78 @@
-<input 
-    type="text" 
-    class="searchContainer" 
-    placeholder="Buscar..." 
-    [(ngModel)]="buscadorPeliculas"
-    (input)="buscarPelicula()"
->
-
-<div class="movie-card-container">
-    <app-movie-card 
-        *ngFor="let pelicula of discoverPeliculas"
-        [titulo] = "pelicula.original_title"  
-        [descripcion] = "pelicula.overview"
-        [poster] = "pelicula.poster_path"
-        (click)="openModal(pelicula)"
-        (keydown.escape)="closeModal()" 
-        tabindex="0"
-    ></app-movie-card>
+<div class="absolute z-[-1] w-[100dvw] min-h-[150dvh] left-0 top-0">
+  <div 
+      class="absolute bg-red-500/50 size-32 top-10 left-16 blur-[100px] animate-pulse"
+      style="animation: pulse 3s infinite;"
+  ></div>
+  <div 
+      class="absolute bg-blue-500/50 size-64 top-0 right-0 blur-[200px]"
+      style="animation: pulse 5s infinite;"
+  ></div>
+  <div 
+      class="absolute bg-purple-500/50 size-64 -bottom-16 blur-[200px]"
+      style="animation: pulse 10s infinite;"
+  ></div>
 </div>
 
-<app-modal-dialog
-    [isOpen] = "isOpenModal"
-    (closeModal) = "closeModal()"
-    [pelicula] = "peliculaSeleccionada"
-></app-modal-dialog>
+<section class="min-h-[65dvh] flex flex-col gap-2 items-center justify-center">
+  <h1 class="text-[4rem] font-semibold m-0">FilmRate</h1>
+  <p class="text-zinc-500">La mejor plataforma de cinéfilos en las web.</p>
+  <div class="flex gap-4 mt-8">
+    <button 
+      routerLink="/login"
+      class="text-sm bg-zinc-200 border border-zinc-600 p-4 text-zinc-900 rounded-md cursor-pointer transition-all duration-200 hover:px-6"
+    >Iniciar Sesión</button>
+    <button 
+      routerLink="/register"
+      class="text-sm border border-zinc-600 p-4 rounded-md cursor-pointer transition-all duration-200 hover:px-6"
+    >Registrarse</button>
+  </div>
+</section>
+
+<section class="flex flex-col gap-4">
+
+  <h1 class="text-[2rem] text-white">Películas Populares</h1>
+
+  <swiper-container 
+    loop="true" 
+    slides-per-view="5" 
+    space-between="20" 
+    autoplay-delay="2500"
+  >
+    <swiper-slide *ngFor="let movie of peliculasPopulares" class="cursor-pointer">
+      <img routerLink="/movie/{{movie.id}}" src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" alt="Imagen de la pelicula" 
+      class="rounded-md hover:opacity-50">
+    </swiper-slide>
+  </swiper-container>
+</section>
+
+<section class="flex flex-col gap-4 mt-8">
+
+  <h1 class="text-[2rem] text-white">Películas Mejor Valoradas</h1>
+
+  <swiper-container 
+    loop="true" 
+    slides-per-view="6" 
+    space-between="20" 
+    autoplay-delay="2500"
+  >
+    <swiper-slide *ngFor="let movie of peliculasMejorValoradas">
+      <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" alt="Imagen de la pelicula" class="rounded-md">
+    </swiper-slide>
+  </swiper-container>
+</section>
+
+<section class="flex flex-col gap-4 mt-8">
+
+  <h1 class="text-[2rem] text-white">Próximos Estrenos</h1>
+
+  <swiper-container 
+    loop="true" 
+    slides-per-view="5" 
+    space-between="20" 
+    autoplay-delay="2500"
+  >
+    <swiper-slide *ngFor="let movie of proximosEstrenos">
+      <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" alt="Imagen de la pelicula" class="rounded-md">
+    </swiper-slide>
+  </swiper-container>
+</section>

@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Usuario } from './models/usuario.model';
+import { Rating } from './models/rating.model';
 
 @Injectable({
   providedIn: 'root',
@@ -17,8 +18,25 @@ export class ApiService {
     Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmMTYyNGQ2MTZiMDYxMGQ5ZmMxNjRhZWRjM2U5NmVkMyIsIm5iZiI6MTcxMTMyNTkyOS4zMzcsInN1YiI6IjY2MDBjMmU5MDQ3MzNmMDE3ZGVlMjQyZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.8WLeC1pc9flvHqTMcKv6n4nFMFwmDAAKF972_k8Cz20'
   });
 
-  public getPeliculas() {
+  // API THE MOVIE DB
+
+  public getPelicula(peliculaId: any) {
+    let url = `https://api.themoviedb.org/3/movie/${peliculaId}?language=en-US`;
+    return this.http.get(url, { headers: this.headers });  // Asegúrate de enviar las cabeceras correctamente
+  }
+
+  public getPeliculasPopulares() {
     let url = 'https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc';
+    return this.http.get(url, { headers: this.headers });  // Asegúrate de enviar las cabeceras correctamente
+  }
+
+  public getPeliculasMejorValoradas() {
+    let url = 'https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1';
+    return this.http.get(url, { headers: this.headers });  // Asegúrate de enviar las cabeceras correctamente
+  }
+
+  public getEstrenos(){
+    let url = 'https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=1';
     return this.http.get(url, { headers: this.headers });  // Asegúrate de enviar las cabeceras correctamente
   }
 
@@ -27,10 +45,18 @@ export class ApiService {
     return this.http.get(url, { headers: this.headers });  // Asegúrate de enviar las cabeceras correctamente
   }
 
-  public getProfile(){
-    const url = `${this.privateAPIURL}/`;
-    console.log(url);
-    return this.http.get(url)
+
+  // BBDD
+  public getProfile(userId:string){
+    const url = `${this.privateAPIURL}/user/${userId}`;
+    return this.http.get(url);
+  }
+
+  public addRating(newRating: Rating) {
+    const url = `${this.privateAPIURL}/addRating`;
+    return this.http.post(url, {
+      datosRating: newRating
+    });
   }
 
   public login(password: string, email: string) {
@@ -52,9 +78,13 @@ export class ApiService {
     localStorage.setItem('user_id', user_id);
   }
 
-  public sessionGetter(){
-    return localStorage.getItem('user_id');
+  public sessionGetter() {
+    if (typeof window !== 'undefined' && window.localStorage) {
+      return localStorage.getItem('user_id');
+    }
+    return null;
   }
+  
 
   public sessionRemover(){
     localStorage.removeItem('user_id');

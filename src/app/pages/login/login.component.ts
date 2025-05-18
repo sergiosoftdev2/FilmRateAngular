@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { ApiService } from '../../services/api.service';
 import { FormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { RouterLink, Router } from '@angular/router';
 
 
 @Component({
@@ -16,21 +16,25 @@ import { RouterLink } from '@angular/router';
 
 export class loginComponent {
 
-    constructor(private apiService: ApiService) { }
+    constructor(
+        private apiService: ApiService,
+        private Router: Router
+    ) { }
 
     public password: string = "";
     public email: string = "";
 
     ngOnInit() {
-        // this.apiService.getPeliculas().subscribe((data: any) => {
-            // this.discoverPeliculas = data.results;
-        // })
+        if(this.apiService.sessionGetter() !== null){
+            this.Router.navigate(['/user']);
+        }
     }
 
     login(){
         this.apiService.login(this.password, this.email).subscribe(
             (data: any) => {
                 this.apiService.sessionSetter(data.userId);
+                this.Router.navigate(['/user']);
             },
             (error) => {
                 console.error('Error en el login:', error);

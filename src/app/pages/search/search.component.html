@@ -1,0 +1,18 @@
+<input 
+    type="text" 
+    class="searchContainer" 
+    placeholder="Buscar..." 
+    [(ngModel)]="buscadorPeliculas"
+    (input)="buscarPelicula()"
+>
+
+<div class="movie-card-container">
+    <app-movie-card 
+        *ngFor="let pelicula of discoverPeliculas"
+        [titulo] = "pelicula.original_title"  
+        [descripcion] = "pelicula.overview"
+        [poster] = "pelicula.poster_path"
+        routerLink="/movie/{{pelicula.id}}"
+        tabindex="0"
+    ></app-movie-card>
+</div>

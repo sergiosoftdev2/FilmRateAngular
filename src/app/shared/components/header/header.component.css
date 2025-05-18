@@ -4,10 +4,11 @@
   height: 50px;
   top: 0;
   left: 0;
-  padding: 20px;
+  padding-inline: 20px;
   display: flex;
   align-items: center;
-  background-color: black;
+  backdrop-filter: blur(50px);
+  background-color: rgba(0, 0, 0, 0.35);
   width: 100%;
   box-sizing: border-box;
 }

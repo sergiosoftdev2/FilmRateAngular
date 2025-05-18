@@ -1,6 +1,6 @@
 <header class="main-header">
     <div class="title">
-        <a routerLink="/home">FilmRate</a>
+        <a routerLink="/">FilmRate</a>
     </div>
     <nav class="header-nav">
         <a routerLink="/explore" class="">Explore</a>
@@ -8,8 +8,27 @@
         <a routerLink="/explore">Top Rated</a>
     </nav>
     <nav>
-        <a routerLink="/user" class="icon headerIcon">
+        <a *ngIf="isLoggedIn" routerLink="/user" class="relative group icon headerIcon">
             <img src="/account.png" alt="">
+            <div 
+                class="absolute top-full right-0 w-[300px] h-64  flex flex-col opacity-0 pointer-events-none 
+                group-hover:opacity-100 group-hover:pointer-events-auto pt-2"
+            >
+                <div class="w-full h-full p-4 flex flex-col bg-black/50 rounded backdrop border border-zinc-800 rounded-md">
+                    <a routerLink="/user" class="px-2 py-1 hover:bg-zinc-700">Perfil</a>
+                    <a routerLink="/user" class="px-2 py-1 hover:bg-zinc-700">Cerrar Sesión</a>
+                </div>
+            </div>
         </a>
+
+        <a 
+            *ngIf="!isLoggedIn" 
+            routerLink="/login" 
+            style="height: 50px;"
+            class="bg-gradient-to-tr group font-semibold flex items-center from-zinc-50 to-zinc-300 text-xs border border-zinc-400 h-full px-2 text-zinc-900 hover:px-3 transition-all duration-200"
+        >
+            Iniciar Sesión
+        </a>
+
     </nav>
 </header>

@@ -1,6 +1,7 @@
-import { CommonModule, NgForOf } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
 import { ApiService } from '../../services/api.service';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-home',
@@ -12,14 +13,33 @@ import { ApiService } from '../../services/api.service';
 
 export class userComponent {
 
-    misPeliculas: any;
+    constructor(
+        private apiService: ApiService,
+        private Router: Router
+    ) { }
 
-    constructor(private apiService: ApiService) { }
+    misPeliculas: any;
+    userId:string = "";
+    user:any;
 
     ngOnInit() {
-        this.apiService.getPeliculas().subscribe((data: any) => {
-            console.log(data.results);
+
+        if(this.apiService.sessionGetter() == null){
+            this.Router.navigate(['/login']);
+        }else{
+            const session = this.apiService.sessionGetter();
+            if (session) {
+                this.userId = session;
+            }
+        }
+
+        this.apiService.getProfile(this.userId).subscribe((data: any) => {
+            this.user = data;
+        })
+
+        this.apiService.getPeliculasPopulares().subscribe((data: any) => {
             this.misPeliculas = data.results;
         })
+
     }
 }

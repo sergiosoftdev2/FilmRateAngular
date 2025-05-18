@@ -1,10 +1,32 @@
+@import "tailwindcss";
+
+@keyframes pulse {
+    0% {
+      transform: scale(1);
+      opacity: 0%;
+    }
+    50% {
+      transform: scale(1.1);
+      opacity: 100%;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 0%;
+    }
+}
+
 :root{
 
     --paragraph-color: #cfcfcf;
     --terciary-color: #303030;;
     --secondary-color: #3a3a3a;
-    --primary-color: #363636;
-    --background-color: #202020;
+    --primary-color: #1a1a1a;
+    --background-color: #0a0a0a;
+
+    --glass-primary-color: #1a1a1a24;
+    --glass-secondary-color: #3a3a3a1c;
+    --glass-terciary-color: #30303099;
+    --border-radius: 5px;
 
 }
 
@@ -15,7 +37,7 @@
 }
   
 body{
-    background-color: #202020;
+    background-color: var(--background-color);
     color: white;
 }
 
@@ -23,4 +45,16 @@ body{
     color: white;
     width: 20px;
     height: 20px;
+}
+
+.half{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 10px;
+}
+
+.errorText{
+    color: rgb(190, 0, 0);
+    font-size: 12px;
 }

@@ -1,0 +1,59 @@
+<div class="absolute z-[-1] w-[100dvw] h-[calc(100dvh)] overflow-hidden left-0 top-0">
+    <div 
+        class="absolute bg-red-500/50 size-32 top-10 left-16 blur-[100px] animate-pulse"
+        style="animation: pulse 3s infinite;"
+    ></div>
+    <div 
+        class="absolute bg-blue-500/50 size-64 top-0 right-0 blur-[200px]"
+        style="animation: pulse 5s infinite;"
+    ></div>
+    <div 
+        class="absolute bg-purple-500/50 size-64 -bottom-16 blur-[200px]"
+        style="animation: pulse 10s infinite;"
+    ></div>
+</div>
+
+<div class="entireScreen relative">
+
+    <h1 class="text-[2rem] font-bold overflow-y-hidden">Registro:</h1>
+
+    <div class="loginContainer border rounded-md border-zinc-800 backdrop-blur-xl">
+        <div class="half">
+            <label for="" class="label">
+                Nombre:
+                <input type="text" class="input" [(ngModel)]="nombre" required>
+            </label>
+            <label for="" class="label">
+                Apellidos:
+                <input type="text" class="input" [(ngModel)]="apellidos" required>
+            </label>
+        </div>
+        <label for="" class="label">
+            Correo Electrónico:
+            <div style="display: flex; flex-direction: column; gap: 2px;">
+                <input type="email" class="input" [(ngModel)]="email" required>
+                <span *ngIf="emailFound" class="errorText">Este email ya está registrado</span>
+            </div>
+        </label>
+        <div class="half">
+            <label for="" class="label">
+                Contraseña:
+                <input type="password" class="input" [(ngModel)]="password" required>
+            </label>
+            <label for="" class="label">
+                Fecha de Nacimiento:
+                <input type="date" class="input" [(ngModel)]="fecha_nacimiento" required>
+            </label>
+        </div>   
+        <label for="" class="label">
+            <div>Username:</div>
+            <input type="text" class="input" [(ngModel)]="username">
+        </label>
+    </div>
+
+    <div class="buttons">
+        <button routerLink="/login" class="border border-zinc-800 bg-zinc-100 text-zinc-900">Iniciar Sesión</button>
+        <button (click)="register()" class="border border-zinc-800 bg-[var(--primary-color)]">Registrarse</button>
+    </div>
+
+</div>

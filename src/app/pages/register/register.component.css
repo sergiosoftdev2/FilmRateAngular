@@ -1,0 +1,59 @@
+.entireScreen{
+    width: 100%;
+    min-height: calc(100dvh - 70px);
+    display: flex;
+    flex-direction: column;
+    gap:20px;
+    align-items: start;
+    justify-content: center;
+}
+
+.loginContainer{
+    width: 100%;
+    display: flex;
+    padding: 20px;
+    box-sizing: border-box;
+    align-items: center;
+    gap: 20px;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--glass-primary-color);
+}
+
+.loginContainer .label{
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    gap: 10px;
+    width: 100%;
+}
+
+.loginContainer .label input{
+    color: white;
+    border-radius: 5px;
+    background-color: var(--glass-secondary-color);
+    font-size: 0.75rem;
+    box-sizing: border-box;
+    border: 1px solid var(--primary-color);
+    padding: 10px;
+}
+
+.buttons{
+    display: flex;
+    gap: 20px;
+    width: 100%;
+    justify-content: center;
+}
+
+.buttons button{
+    border-radius: 5px;
+    padding: 10px 20px;
+    backdrop-filter: blur(10px);
+    transition: 0.2s ease-in-out;
+    cursor: pointer;
+}
+
+.buttons button:hover{
+    padding-inline: 25px;
+    opacity: 0.8;
+}

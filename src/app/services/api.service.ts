@@ -1,10 +1,14 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Usuario } from './models/usuario.model';
 
 @Injectable({
   providedIn: 'root',
 })
+
 export class ApiService {
+
+  public privateAPIURL = "http://localhost:4080"
   
   constructor(private http: HttpClient) {}
 
@@ -22,4 +26,38 @@ export class ApiService {
     const url = `https://api.themoviedb.org/3/search/movie?query=${query}&include_adult=false&language=en-US&page=1`;
     return this.http.get(url, { headers: this.headers });  // Asegúrate de enviar las cabeceras correctamente
   }
+
+  public getProfile(){
+    const url = `${this.privateAPIURL}/`;
+    console.log(url);
+    return this.http.get(url)
+  }
+
+  public login(password: string, email: string) {
+    const url = `${this.privateAPIURL}/login`;
+    return this.http.post(url, {
+      email: email,
+      password: password
+    });
+  }
+
+  public register(usuario: Usuario) {
+    const url = `${this.privateAPIURL}/register`;
+    return this.http.post(url, {
+      datosUsuario: usuario
+    });
+  }
+
+  public sessionSetter(user_id: string){
+    localStorage.setItem('user_id', user_id);
+  }
+
+  public sessionGetter(){
+    return localStorage.getItem('user_id');
+  }
+
+  public sessionRemover(){
+    localStorage.removeItem('user_id');
+  }
+
 }

@@ -1,0 +1,38 @@
+<div class="absolute z-[-1] w-[100dvw] h-[calc(100dvh)] overflow-hidden left-0 top-0">
+    <div 
+        class="absolute bg-red-500/50 size-32 top-10 left-16 blur-[100px] animate-pulse"
+        style="animation: pulse 3s infinite;"
+    ></div>
+    <div 
+        class="absolute bg-blue-500/50 size-64 top-0 right-0 blur-[200px]"
+        style="animation: pulse 5s infinite;"
+    ></div>
+    <div 
+        class="absolute bg-purple-500/50 size-64 -bottom-16 blur-[200px]"
+        style="animation: pulse 10s infinite;"
+    ></div>
+</div>
+
+<div class="entireScreen">
+
+    <h1 class="text-[2rem] font-bold overflow-y-hidden">Iniciar Sesión:</h1>
+
+    <div class="loginContainer border rounded-md border-zinc-800 backdrop-blur-xl">
+        <div class="half">
+            <label for="" class="label">
+                Correo Electrónico:
+                <input type="email" class="input" [(ngModel)]="email">
+            </label>
+            <label for="" class="label">
+                Contraseña:
+                <input type="password" class="input" [(ngModel)]="password">
+            </label>
+        </div>
+    </div>
+
+    <div class="buttons">
+        <button class="border border-zinc-800 bg-zinc-200 text-zinc-900" (click)="login()">Iniciar Sesión</button>
+        <button routerLink="/register" class="border border-zinc-800">Registrarse</button>
+    </div>
+
+</div>

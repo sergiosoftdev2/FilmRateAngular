@@ -35,6 +35,11 @@ export class homeComponent {
         this.apiService.getPeliculas().subscribe((data: any) => {
             this.discoverPeliculas = data.results;
         })
+
+        this.apiService.getProfile().subscribe((data: any) => {
+            console.log(data);
+        })
+
     }
 
     closeModal() {

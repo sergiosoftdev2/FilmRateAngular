@@ -38,8 +38,8 @@
     space-between="20" 
     autoplay-delay="2500"
   >
-    <swiper-slide *ngFor="let movie of peliculasPopulares" class="cursor-pointer">
-      <img routerLink="/movie/{{movie.id}}" src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" alt="Imagen de la pelicula" 
+    <swiper-slide *ngFor="let movie of peliculasPopulares" class="cursor-pointer" routerLink="/movie/{{movie.id}}">
+      <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" alt="Imagen de la pelicula"
       class="rounded-md hover:opacity-50">
     </swiper-slide>
   </swiper-container>
@@ -70,8 +70,9 @@
     slides-per-view="5" 
     space-between="20" 
     autoplay-delay="2500"
+    ngSkipHydration
   >
-    <swiper-slide *ngFor="let movie of proximosEstrenos">
+    <swiper-slide *ngFor="let movie of proximosEstrenos" ngSkipHydration>
       <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" alt="Imagen de la pelicula" class="rounded-md">
     </swiper-slide>
   </swiper-container>

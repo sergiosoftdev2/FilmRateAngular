@@ -8,12 +8,13 @@ import { RouterLink } from '@angular/router';
 register();
 
 @Component({
-    selector: 'app-login',
+    selector: 'app-home',
     imports: [CommonModule, RouterLink],
     standalone: true,
     templateUrl: './home.component.html',
     styleUrls: ['./home.component.css'],
-    schemas: [CUSTOM_ELEMENTS_SCHEMA]
+    schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    host: {ngSkipHydration: 'true'},
 })
 
 export class homeComponent {

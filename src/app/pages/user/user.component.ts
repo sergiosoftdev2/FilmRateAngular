@@ -4,7 +4,7 @@ import { ApiService } from '../../services/api.service';
 import { Router } from '@angular/router';
 
 @Component({
-    selector: 'app-home',
+    selector: 'app-user',
     imports: [CommonModule],
     standalone: true,
     templateUrl: './user.component.html',

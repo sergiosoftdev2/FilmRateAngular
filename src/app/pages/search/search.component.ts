@@ -2,7 +2,6 @@
 import { CommonModule, NgForOf } from '@angular/common';
 import { Component } from '@angular/core';
 import { ApiService } from '../../services/api.service';
-import { ModalDialogComponent } from '../../shared/components/modal-dialog/modal-dialog.component';
 import { MovieCard } from '../../shared/components/movieCard/movieCard.component';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
@@ -10,7 +9,7 @@ import { RouterLink } from '@angular/router';
 
 @Component({
     selector: 'app-home',
-    imports: [CommonModule, ModalDialogComponent, MovieCard, NgForOf, FormsModule, RouterLink],
+    imports: [CommonModule, MovieCard, NgForOf, FormsModule, RouterLink],
     standalone: true,
     templateUrl: './search.component.html',
     styleUrls: ['./search.component.css']

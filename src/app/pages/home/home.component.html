@@ -13,7 +13,7 @@
   ></div>
 </div>
 
-<section class="min-h-[65dvh] flex flex-col gap-2 items-center justify-center">
+<section class="min-h-[65dvh] flex flex-col gap-2 items-center justify-center" *ngIf="!userId">
   <h1 class="text-[4rem] font-semibold m-0">FilmRate</h1>
   <p class="text-zinc-500">La mejor plataforma de cinéfilos en las web.</p>
   <div class="flex gap-4 mt-8">
@@ -33,14 +33,16 @@
   <h1 class="text-[2rem] text-white">Películas Populares</h1>
 
   <swiper-container 
-    loop="true" 
     slides-per-view="5" 
     space-between="20" 
     autoplay-delay="2500"
   >
     <swiper-slide *ngFor="let movie of peliculasPopulares" class="cursor-pointer" routerLink="/movie/{{movie.id}}">
-      <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" alt="Imagen de la pelicula"
-      class="rounded-md hover:opacity-50">
+      <img 
+        src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" 
+        alt="Imagen de la pelicula"
+        class="rounded-md hover:opacity-50"
+      >
     </swiper-slide>
   </swiper-container>
 </section>
@@ -50,13 +52,16 @@
   <h1 class="text-[2rem] text-white">Películas Mejor Valoradas</h1>
 
   <swiper-container 
-    loop="true" 
     slides-per-view="6" 
     space-between="20" 
-    autoplay-delay="2500"
+    autoplay-delay="2000"
   >
-    <swiper-slide *ngFor="let movie of peliculasMejorValoradas">
-      <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" alt="Imagen de la pelicula" class="rounded-md">
+    <swiper-slide *ngFor="let movie of peliculasMejorValoradas" routerLink="/movie/{{movie.id}}">
+      <img 
+        src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" 
+        alt="Imagen de la pelicula" 
+        class="rounded-md hover:opacity-50"
+      >
     </swiper-slide>
   </swiper-container>
 </section>
@@ -66,14 +71,17 @@
   <h1 class="text-[2rem] text-white">Próximos Estrenos</h1>
 
   <swiper-container 
-    loop="true" 
     slides-per-view="5" 
     space-between="20" 
     autoplay-delay="2500"
     ngSkipHydration
   >
-    <swiper-slide *ngFor="let movie of proximosEstrenos" ngSkipHydration>
-      <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" alt="Imagen de la pelicula" class="rounded-md">
+    <swiper-slide *ngFor="let movie of proximosEstrenos" routerLink="/movie/{{movie.id}}">
+      <img 
+        src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" 
+        alt="Imagen de la pelicula" 
+        class="rounded-md hover:opacity-50"
+      >
     </swiper-slide>
   </swiper-container>
 </section>

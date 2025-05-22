@@ -1,11 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { ApiService } from '../../services/api.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
     selector: 'app-user',
-    imports: [CommonModule],
+    imports: [CommonModule, RouterLink],
     standalone: true,
     templateUrl: './user.component.html',
     styleUrls: ['./user.component.css']
@@ -37,8 +37,9 @@ export class userComponent {
             this.user = data;
         })
 
-        this.apiService.getPeliculasPopulares().subscribe((data: any) => {
-            this.misPeliculas = data.results;
+        this.apiService.getUserRatings(this.userId).subscribe((data: any) => {
+            this.misPeliculas = data.ratings;
+            console.log(this.misPeliculas);
         })
 
     }

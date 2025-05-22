@@ -1,64 +1,97 @@
 @import "tailwindcss";
 
 @keyframes pulse {
-    0% {
-      transform: scale(1);
-      opacity: 0%;
-    }
-    50% {
-      transform: scale(1.1);
-      opacity: 100%;
-    }
-    100% {
-      transform: scale(1);
-      opacity: 0%;
-    }
+	0% {
+		transform: scale(1);
+		opacity: 0%;
+	}
+
+	50% {
+		transform: scale(1.1);
+		opacity: 100%;
+	}
+
+	100% {
+		transform: scale(1);
+		opacity: 0%;
+	}
 }
 
-:root{
+@keyframes fadeInFromBottom {
+	0% {
+		transform: translateY(40px);
+		opacity: 0%;
+	}
 
-    --paragraph-color: #cfcfcf;
-    --terciary-color: #303030;;
-    --secondary-color: #3a3a3a;
-    --primary-color: #1a1a1a;
-    --background-color: #0a0a0a;
+	100% {
+		transform: translateY(0);
+		opacity: 100%;
+	}
+}
 
-    --glass-primary-color: #1a1a1a24;
-    --glass-secondary-color: #3a3a3a1c;
-    --glass-terciary-color: #30303099;
-    --border-radius: 5px;
+@keyframes fadeInFromRight {
+	0% {
+		transform: translateX(40px);
+		opacity: 0%;
+	}
+
+	100% {
+		transform: translateX(0);
+		opacity: 100%;
+	}
+}
+
+:root {
+
+	--paragraph-color: #cfcfcf;
+	--terciary-color: #303030;
+	;
+	--secondary-color: #3a3a3a;
+	--primary-color: #1a1a1a;
+	--background-color: #0a0a0a;
+
+	--glass-primary-color: #1a1a1a24;
+	--glass-secondary-color: #3a3a3a1c;
+	--glass-terciary-color: #30303099;
+	--border-radius: 5px;
 
 }
 
-*{
-    font-family: "Poppins", sans-serif;
-    scrollbar-width: none;
-    scrollbar-color: transparent;
-}
-  
-body{
-    background-color: var(--background-color);
-    color: white;
+* {
+	font-family: "Poppins", sans-serif;
+	scrollbar-width: none;
+	scrollbar-color: transparent;
 }
 
-.icon{
-    color: white;
-    width: 20px;
-    height: 20px;
+body {
+	background-color: var(--background-color);
+	color: white;
 }
 
-.half{
-    display: flex;
-    align-items: center;
-    width: 100%;
-    gap: 10px;
+.icon {
+	color: white;
+	width: 20px;
+	height: 20px;
 }
 
-.errorText{
-    color: rgb(190, 0, 0);
-    font-size: 12px;
+.half {
+	display: flex;
+	align-items: center;
+	width: 100%;
+	gap: 10px;
 }
 
-.backdrop{
-    backdrop-filter: blur(100px);
+.errorText {
+	color: rgb(190, 0, 0);
+	font-size: 12px;
+}
+
+.backdrop {
+	backdrop-filter: blur(100px);
+}
+
+.disabled {
+	opacity: 0.2;
+	pointer-events: none;
+	cursor: not-allowed;
 }

@@ -24,6 +24,7 @@ export class homeComponent {
   peliculasPopulares: any[] = [];
   peliculasMejorValoradas: any[] = [];
   proximosEstrenos: any[] = [];
+  userId: any;
   
   ngOnInit() {
 
@@ -50,6 +51,8 @@ export class homeComponent {
         }
       });
     })
+
+    this.userId = this.apiService.sessionGetter();
 
   }
 

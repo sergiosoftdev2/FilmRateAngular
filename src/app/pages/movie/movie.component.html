@@ -14,37 +14,45 @@
 </div>
 
 
-<section>
+<!-- Contenido principal -->
+<section *ngIf="!isLoading && movie">
     <div class="flex gap-4 w-full">
+        
+        <!-- POStER -->
         <div class="w-1/4">
             <img 
-                src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" 
+                src="https://image.tmdb.org/t/p/w500{{ movie?.poster_path }}" 
                 alt="Imagen de la pelicula" 
                 class="rounded-md hover:opacity-50 w-full"
             >
         </div>
+
+        <!-- MOVIE INFO -->
         <div class="flex flex-col gap-2 w-3/4">
-            <h1 class="text-[2rem] font-semibold">{{movie.original_title}}</h1>
+            <h1 class="text-[2rem] font-semibold">{{movie?.original_title}}</h1>
             <div class="flex gap-2 text-[12px]">
                 <span 
                     *ngFor="let genre of movie.genres"
                     class="bg-zinc-800/50 text-blue-100 px-2 py-1 rounded-md border border-zinc-600"
                 >{{genre.name}}</span>
             </div>
-            <p class="text-[0.9rem] text-white/80">{{movie.overview}}</p>
-            <div class="mt-4 flex gap-4">
+            <p class="text-[0.9rem] text-white/80">{{movie?.overview}}</p>
+            <div class="mt-4 flex gap-4" *ngIf="isLoggedIn">
                 <button
-                    class="bg-zinc-500/50 p-2 w-1/2 rounded-md border border-zinc-600 text-sm text-blue-100 cursor-pointer"
+                    class="bg-zinc-500/50 p-2 grow rounded-md border border-zinc-600 text-sm text-blue-100 cursor-pointer"
                     (click)="anadirCritica = true"
+                    *ngIf="!isAlreadyRated"
                 >Añadir Crítica</button>
                 <button
-                    class="bg-zinc-800/50 p-2 w-1/2 rounded-md border border-zinc-600 text-sm cursor-pointer"
+                    class="bg-zinc-800/50 p-2 grow rounded-md border border-zinc-600 text-sm cursor-pointer"
                 >Añadir a Watchlist</button>
             </div>
 
+            <!-- AÑADIR CRITICA -->
             <div 
-                *ngIf="anadirCritica" 
-                class="mt-8 flex flex-col gap-4 p-4 rounded-md backdrop-blur-xl bg-zinc-900/50"
+                *ngIf="anadirCritica && !isAlreadyRated" 
+                class="mt-8 flex flex-col gap-4 rounded-md backdrop-blur-xl"
+                style="animation: fadeInFromBottom 0.5s ease-in-out;"
             >
                 <div class="flex flex-col gap-2">
                     <h3>Crítica:</h3>
@@ -63,17 +71,70 @@
                             *ngFor="let numero of numeros" 
                             class="bg-zinc-800/50 px-2 py-1 rounded-md grow flex items-center justify-center cursor-pointer border border-zinc-700" 
                             [ngClass]="{'!bg-white': numero === activeNumero, 'text-black': numero === activeNumero}" 
-                            (click)="toggleActiveNumero(numero)" 
+                            (click)="setActiveNumero(numero)" 
                         >{{numero}}</span> 
                     </div>
                 </div>
 
                 <button 
                     class="transition-all duration-200 p-2 bg-zinc-800/50 rounded-md cursor-pointer hover:bg-zinc-100 hover:text-black"
-                    (click)="addCritica()"
+                    (click)="enviarCritica()"
                 >Añadir Crítica</button>
             </div>
 
+            <!-- SI CRITICA-->
+            <div 
+                *ngIf="isAlreadyRated" 
+                class="mt-8 flex flex-col gap-4 rounded-md backdrop-blur-xl p-4 border border-zinc-600"
+                style="animation: fadeInFromBottom 0.5s ease-in-out;"
+            >
+                <div class="flex flex-col gap-2">
+                    <h3>Crítica:</h3>
+                    <textarea 
+                        placeholder="Escribe tu crítica aquí..."
+                        class="bg-zinc-800/50 rounded-md p-2 text-white/80 text-xs min-h-32 w-full"
+                        disabled
+                    >{{critica}}</textarea>
+                </div>
+                <div class="flex flex-col gap-2">
+                    <h3>Puntuación:</h3>
+                    <div class="flex gap-2 justify-between"> 
+                        <span 
+                            *ngFor="let numero of numeros" 
+                            class="bg-zinc-800/50 px-2 py-1 rounded-md grow flex items-center justify-center" 
+                            [ngClass]="{'!bg-white': numero === activeNumero, 'text-black': numero === activeNumero}" 
+                        >{{numero}}</span> 
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- Sección de carga -->
+<section *ngIf="isLoading && !movie">
+    <div class="flex gap-4 w-full">
+        
+        <!-- POStER -->
+        <div class="w-1/4 h-[600px] rounded bg-zinc-700 animate-pulse">
+
+        </div>
+
+        <!-- MOVIE INFO -->
+        <div class="flex flex-col gap-2 w-3/4">
+            <div class="w-full p-2 h-10 rounded bg-zinc-700 animate-pulse"></div>
+            <div class="flex gap-2 text-[12px]">
+                <div class="w-10 p-2 h-5 rounded bg-zinc-700 animate-pulse"></div>
+                <div class="w-16 p-2 h-5 rounded bg-zinc-700 animate-pulse"></div>
+                <div class="w-8 p-2 h-5 rounded bg-zinc-700 animate-pulse"></div>
+                <div class="w-32 p-2 h-5 rounded bg-zinc-700 animate-pulse"></div>
+            </div>
+            <div class="w-full p-2 h-32 rounded bg-zinc-700 animate-pulse"></div>
+            <div class="mt-4 flex gap-4">
+                <div class="grow p-2 h-10 rounded bg-zinc-700 animate-pulse"></div>
+                <div class="grow p-2 h-10 rounded bg-zinc-700 animate-pulse"></div>
+            </div>
         </div>
     </div>
 </section>

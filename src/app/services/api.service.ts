@@ -59,6 +59,25 @@ export class ApiService {
     });
   }
 
+  public getUserRating(user_id: string, movie_id: string) {
+    const url = `${this.privateAPIURL}/user-movie`;
+    return this.http.get(url, {
+      params: {
+        user_id: user_id,
+        movie_id: movie_id
+      }
+    });
+  }
+
+  public getUserRatings(user_id: string) {
+    const url = `${this.privateAPIURL}/user-movies`;
+    return this.http.get(url, {
+      params: {
+        user_id: user_id
+      }
+    });
+  }
+
   public login(password: string, email: string) {
     const url = `${this.privateAPIURL}/login`;
     return this.http.post(url, {
@@ -85,7 +104,6 @@ export class ApiService {
     return null;
   }
   
-
   public sessionRemover(){
     localStorage.removeItem('user_id');
   }

@@ -34,7 +34,7 @@ export class loginComponent {
         this.apiService.login(this.password, this.email).subscribe(
             (data: any) => {
                 this.apiService.sessionSetter(data.userId);
-                this.Router.navigate(['/user']);
+                window.location.href = '/user';
             },
             (error) => {
                 console.error('Error en el login:', error);

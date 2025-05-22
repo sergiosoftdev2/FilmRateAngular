@@ -36,28 +36,14 @@
 </section>
 
 <section>
-    <h2>Películas Favoritas</h2>
-    <div class="corridor">
-        <div class="movieCard" *ngFor="let pelicula of misPeliculas">
-            <img src="https://image.tmdb.org/t/p/w500/{{pelicula.poster_path}}" alt="">
-        </div>
-    </div>
-</section>
-
-<section>
     <h2>Películas Criticadas</h2>
     <div class="corridor">
         <div class="movieCard" *ngFor="let pelicula of misPeliculas">
-            <img src="https://image.tmdb.org/t/p/w500/{{pelicula.poster_path}}" alt="">
-        </div>
-    </div>
-</section>
-
-<section>
-    <h2>Watchlist</h2>
-    <div class="corridor">
-        <div class="movieCard" *ngFor="let pelicula of misPeliculas">
-            <img src="https://image.tmdb.org/t/p/w500/{{pelicula.poster_path}}" alt="">
+            <img 
+                src="https://image.tmdb.org/t/p/w500/{{pelicula.movie_poster}}" 
+                alt=""
+                routerLink="/movie/{{pelicula.movie_id}}"
+            >
         </div>
     </div>
 </section>

@@ -4,7 +4,7 @@ import { userComponent } from './pages/user/user.component';
 import { loginComponent } from './pages/login/login.component';
 import { registerComponent } from './pages/register/register.component';
 import { homeComponent } from './pages/home/home.component';
-import { movieComponent } from './pages/movie/movie.component';
+import { MovieComponent } from './pages/movie/movie.component';
 
 export const routes: Routes = [
     {path: '', component: homeComponent},
@@ -12,5 +12,5 @@ export const routes: Routes = [
     {path: 'user', component: userComponent},
     {path: 'login', component: loginComponent},
     {path: 'register', component: registerComponent},
-    {path: 'movie/:id', component: movieComponent},
+    {path: 'movie/:id', component: MovieComponent},
 ];

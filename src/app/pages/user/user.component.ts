@@ -18,7 +18,9 @@ export class userComponent {
         private Router: Router
     ) { }
 
-    misPeliculas: any;
+    misPeliculasCriticadas: any;
+    misPeliculasGustadas: any;
+
     userId:string = "";
     user:any;
 
@@ -38,9 +40,19 @@ export class userComponent {
         })
 
         this.apiService.getUserRatings(this.userId).subscribe((data: any) => {
-            this.misPeliculas = data.ratings;
-            console.log(this.misPeliculas);
+            this.misPeliculasCriticadas = data.ratings;
         })
 
+        this.apiService.getUserLikes(this.userId).subscribe((data: any) => {
+            this.misPeliculasGustadas = data.ratings;
+        })
+
+    }
+
+    getMovieInfo(movie_id: string): string {
+        this.apiService.getPelicula(movie_id).subscribe((data: any) => {
+            return data.poster_path;
+        })
+        return "";
     }
 }

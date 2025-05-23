@@ -35,10 +35,23 @@
     </div>
 </section>
 
-<section>
-    <h2>Películas Criticadas</h2>
+<section class="mt-8">
+    <h2 class="font-bold text-xl">Películas Criticadas</h2>
     <div class="corridor">
-        <div class="movieCard" *ngFor="let pelicula of misPeliculas">
+        <div class="movieCard" *ngFor="let pelicula of misPeliculasCriticadas">
+            <img 
+                src="https://image.tmdb.org/t/p/w500/{{pelicula.movie_poster}}" 
+                alt=""
+                routerLink="/movie/{{pelicula.movie_id}}"
+            >
+        </div>
+    </div>
+</section>
+
+<section class="mt-8 text-xl">
+    <h2 class="font-bold">Películas Que Te Han Gustado</h2>
+    <div class="corridor">
+        <div class="movieCard" *ngFor="let pelicula of misPeliculasGustadas">
             <img 
                 src="https://image.tmdb.org/t/p/w500/{{pelicula.movie_poster}}" 
                 alt=""

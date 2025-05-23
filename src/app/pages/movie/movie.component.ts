@@ -5,10 +5,15 @@ import { ActivatedRoute } from '@angular/router';
 import { Rating } from '../../services/models/rating.model';
 import { FormsModule } from '@angular/forms';
 
+import { NgIcon, provideIcons } from '@ng-icons/core';
+import { heroHeart } from '@ng-icons/heroicons/outline';
+import { heroHeartSolid } from '@ng-icons/heroicons/solid';
+
 @Component({
   selector: 'app-movie',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, NgIcon],
+  viewProviders: [provideIcons({heroHeart, heroHeartSolid})],
   templateUrl: './movie.component.html',
   styleUrls: ['./movie.component.css']
 })
@@ -27,6 +32,7 @@ export class MovieComponent implements OnInit {
   isLoggedIn: boolean = false;
 
   isAlreadyRated: boolean = false;
+  isLiked: boolean = false;
 
   constructor(
     private apiService: ApiService,
@@ -45,12 +51,11 @@ export class MovieComponent implements OnInit {
         this.isLoggedIn = true;
     }
 
-    
-
     this.apiService.getPelicula(this.movieId).subscribe({
       next: (data) => {
         this.movie = data;
         this.checkUserRating();
+        this.checkUserLiked();
       },
       error: (error) => {
         console.error('Error al obtener la película:', error);
@@ -80,6 +85,18 @@ export class MovieComponent implements OnInit {
     });
   }
 
+  private checkUserLiked(): void {
+    if (!this.userId || !this.movieId) return;
+    this.apiService.getUserLike(this.userId, this.movieId).subscribe({
+      next: () => {
+        this.isLiked = true;
+      },
+      error: () => {
+        this.isLiked = false;
+      }
+    })
+  }
+
   public setActiveNumero(numero: number): void {
     this.activeNumero = numero;
   }
@@ -104,5 +121,41 @@ export class MovieComponent implements OnInit {
         console.error('Error al enviar crítica:', err);
       }
     });
+  }
+
+  public addLike(): void{
+
+    let datosLike = {
+      user_id: this.userId,
+      movie_id: this.movieId
+    }
+
+    this.apiService.addLike(datosLike).subscribe({
+      next: () => {
+        console.log("HOLA")
+        this.isLiked = true;
+      },
+      error: () => {
+        this.isLiked = false;
+      }
+    })
+  }
+
+  public removeLike(): void{
+
+    let datosLike = {
+      user_id: this.userId,
+      movie_id: this.movieId
+    }
+
+    this.apiService.removeLike(datosLike).subscribe({
+      next: () => {
+        console.log("HOLA")
+        this.isLiked = false;
+      },
+      error: () => {
+        this.isLiked = true;
+      }
+    })
   }
 }

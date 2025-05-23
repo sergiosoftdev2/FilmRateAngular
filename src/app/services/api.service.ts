@@ -52,6 +52,7 @@ export class ApiService {
     return this.http.get(url);
   }
 
+  // BBDD: RATINGS 
   public addRating(newRating: Rating) {
     const url = `${this.privateAPIURL}/addRating`;
     return this.http.post(url, {
@@ -78,6 +79,44 @@ export class ApiService {
     });
   }
 
+
+  // BBDD: LIKES
+  public addLike(datosLike: any) {
+    const url = `${this.privateAPIURL}/addLike`;
+    return this.http.post(url, {
+      datosLike: datosLike
+    });
+  }
+
+  public removeLike(datosLike: any) {
+    const url = `${this.privateAPIURL}/removeLike`;
+    return this.http.post(url, {
+      datosLike: datosLike
+    });
+  }
+  
+  public getUserLike(user_id: string, movie_id: string) {
+    const url = `${this.privateAPIURL}/user-liked-movie`;
+    return this.http.get(url, {
+      params: {
+        user_id: user_id,
+        movie_id: movie_id
+      }
+    });
+  }
+
+  public getUserLikes(user_id: string) {
+    const url = `${this.privateAPIURL}/user-liked-movies`;
+    return this.http.get(url, {
+      params: {
+        user_id: user_id,
+      }
+    });
+  }
+
+
+
+  // BBDD: USER RELATED
   public login(password: string, email: string) {
     const url = `${this.privateAPIURL}/login`;
     return this.http.post(url, {

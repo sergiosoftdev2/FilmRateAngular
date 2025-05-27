@@ -1,11 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { ApiService } from '../../services/api.service';
-import { Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { tabComponent } from '../../shared/components/tab/tab.component';
 
 @Component({
     selector: 'app-user',
-    imports: [CommonModule, RouterLink],
+    imports: [CommonModule, RouterLink, tabComponent],
     standalone: true,
     templateUrl: './user.component.html',
     styleUrls: ['./user.component.css']
@@ -15,11 +16,14 @@ export class userComponent {
 
     constructor(
         private apiService: ApiService,
-        private Router: Router
+        private Router: Router,
+        private route: ActivatedRoute
     ) { }
 
     misPeliculasCriticadas: any;
     misPeliculasGustadas: any;
+
+    activeTab: string = 'Últimos Críticas';
 
     userId:string = "";
     user:any;
@@ -30,8 +34,10 @@ export class userComponent {
             this.Router.navigate(['/login']);
         }else{
             const session = this.apiService.sessionGetter();
-            if (session) {
-                this.userId = session;
+            if (this.route.snapshot.paramMap.get('id') == null) {
+                this.userId = session as string;
+            }else{
+                this.userId = this.route.snapshot.paramMap.get('id') as string;
             }
         }
 
@@ -54,5 +60,9 @@ export class userComponent {
             return data.poster_path;
         })
         return "";
+    }
+
+    setActiveTab(tabTitle: string) {
+        this.activeTab = tabTitle;
     }
 }

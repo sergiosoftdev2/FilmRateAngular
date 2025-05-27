@@ -1,0 +1,61 @@
+<div class="absolute z-[-1] w-[100dvw] h-[calc(100dvh-70px)] left-0 top-0">
+  <div 
+      class="absolute bg-red-500/50 size-32 top-10 left-16 blur-[100px] animate-pulse"
+      style="animation: pulse 3s infinite;"
+  ></div>
+  <div 
+      class="absolute bg-blue-500/50 size-64 top-0 right-0 blur-[200px]"
+      style="animation: pulse 5s infinite;"
+  ></div>
+  <div 
+      class="absolute bg-purple-500/50 size-64 -bottom-16 blur-[200px]"
+      style="animation: pulse 10s infinite;"
+  ></div>
+</div>
+
+<section class="flex h-[calc(100dvh-90px)] gap-4 border-x px-4 border-zinc-900">
+  <nav class="flex flex-col gap-1 pt-8 min-w-64 h-full items-start justify-start rounded">
+    <div 
+      class="flex items-center gap-2 text-base p-2 w-full rounded cursor-pointer" 
+      [ngClass]="{'bg-zinc-900/70': activeTab === 'explore', 'hover:bg-zinc-900/50': activeTab !== 'explore'}"
+      (click)="setActiveTab('explore')"
+    >
+      <ng-icon [name]="activeTab === 'explore' ? 'heroMagnifyingGlassSolid' : 'heroMagnifyingGlass'"></ng-icon>
+      <span>Explore</span>
+    </div>
+    <div 
+      class="flex items-center gap-2 text-base p-2 w-full rounded cursor-pointer" 
+      [ngClass]="{'bg-zinc-900/70': activeTab === 'following', 'hover:bg-zinc-900/30': activeTab !== 'following'}"
+      (click)="setActiveTab('following')"
+    >
+      <ng-icon [name]="activeTab === 'following' ? 'heroUsersSolid' : 'heroUsers'"></ng-icon>
+      <span>Following</span>
+    </div>
+  </nav>
+  <div class="grow rounded p-4 flex flex-col">
+    <!-- Contenido condicional basado en la pestaña activa -->
+    <div *ngIf="activeTab === 'explore'" class="flex flex-col gap-4 h-full">
+      <!-- Contenido para la pestaña Explore -->
+      <h2 class="text-xl">Últimas críticas</h2>
+      <div class="flex flex-col gap-4 overflow-y-auto h-[calc(100%-2rem)]">
+        <div *ngFor="let rating of lastRatings" class="flex gap-4 border rounded border-zinc-900 hover:bg-zinc-900/50 cursor-pointer p-4">
+          <div class="w-1/10">
+            <img src="https://image.tmdb.org/t/p/w500{{ rating?.movie_poster }}" class="rounded" >
+          </div>
+          <div class="w-9/10 flex flex-col gap-2">
+            <span class="text-sm hover:underline cursor-pointer" [routerLink]="['/user', rating.user_id]">{{'@' + rating.profile.username}}</span>
+            <span class="font-semibold hover:underline cursor-pointer" [routerLink]="['/movie', rating.movie_id]">{{rating.movie.original_title}}</span>
+            <p class="text-xs text-zinc-400">{{rating.critic}}</p>
+            <span class="mt-auto">{{rating.rating}}/10</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div *ngIf="activeTab === 'following'" class="h-full">
+      <!-- Contenido para la pestaña Following -->
+      <h2 class="text-xl">Siguiendo</h2>
+      <!-- Aquí puedes mostrar el contenido de following -->
+    </div>
+  </div>
+</section>

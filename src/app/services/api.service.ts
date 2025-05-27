@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Usuario } from './models/usuario.model';
 import { Rating } from './models/rating.model';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -11,7 +12,10 @@ export class ApiService {
 
   public privateAPIURL = "http://localhost:4080"
   
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private Router: Router
+  ) {}
 
   private headers = new HttpHeaders({
     accept: 'application/json',
@@ -75,6 +79,15 @@ export class ApiService {
     return this.http.get(url, {
       params: {
         user_id: user_id
+      }
+    });
+  }
+
+  public getLastRatings(skip: number) {
+    const url = `${this.privateAPIURL}/last-ratings`;
+    return this.http.get(url, {
+      params: {
+        skip: skip,
       }
     });
   }
@@ -145,6 +158,7 @@ export class ApiService {
   
   public sessionRemover(){
     localStorage.removeItem('user_id');
+    this.Router.navigate(['/login']);
   }
 
 }

@@ -35,6 +35,19 @@
     </div>
 </section>
 
+<div class="flex gap-2 mb-8">
+    <tab 
+      [title]="'Últimos Críticas'" 
+      [active]="activeTab === 'Últimos Críticas'"
+      (tabClick)="setActiveTab($event)"
+    ></tab>
+    <tab 
+      [title]="'Siguiendo'" 
+      [active]="activeTab === 'Siguiendo'"
+      (tabClick)="setActiveTab($event)"
+    ></tab>
+  </div>
+
 <section class="mt-8">
     <h2 class="font-bold text-xl">Películas Criticadas</h2>
     <div class="corridor">

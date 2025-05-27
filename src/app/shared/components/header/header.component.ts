@@ -29,6 +29,11 @@ export class headerComponent {
         this.eliminarPelicula.emit(this.titulo);
     }
 
+    logOut(){
+        this.apiService.sessionRemover();
+        this.isLoggedIn = false;
+    }
+
     ngOnInit() {
         if(this.apiService.sessionGetter() !== null){
             this.isLoggedIn = true;

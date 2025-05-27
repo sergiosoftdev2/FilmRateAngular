@@ -1,0 +1,10 @@
+<div 
+    class="text-xs rounded py-1 px-2 cursor-pointer"
+    [ngClass]="{
+        'bg-purple-300': !active,
+        'bg-purple-500': active
+    }"
+    (click)="onClick()"
+>
+    {{title}}
+</div>

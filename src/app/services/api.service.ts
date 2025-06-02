@@ -92,6 +92,15 @@ export class ApiService {
     });
   }
 
+  public getUsersRatings(user_ids: string[]) {
+    const url = `${this.privateAPIURL}/users-movies`;
+    return this.http.get(url, {
+      params: {
+        user_ids: user_ids,
+      }
+    });
+  }
+
 
   // BBDD: LIKES
   public addLike(datosLike: any) {
@@ -164,6 +173,23 @@ export class ApiService {
 
   public userFollowings(user_id: string) {
     const url = `${this.privateAPIURL}/user-followings`;
+    return this.http.get(url, {
+      params: {
+        user_id: user_id,
+      }
+    });
+  }
+
+  public userFollowersCount(user_id: string) {
+    const url = `${this.privateAPIURL}/user-followers-count`;
+    return this.http.get(url, {
+      params: {
+        user_id: user_id,
+      }
+    });
+  }
+  public userFollowingsCount(user_id: string) {
+    const url = `${this.privateAPIURL}/user-followings-count`;
     return this.http.get(url, {
       params: {
         user_id: user_id,

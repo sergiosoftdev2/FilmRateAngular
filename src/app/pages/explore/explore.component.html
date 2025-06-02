@@ -53,9 +53,20 @@
     </div>
     
     <div *ngIf="activeTab === 'following'" class="h-full">
-      <!-- Contenido para la pestaña Following -->
-      <h2 class="text-xl">Siguiendo</h2>
-      <!-- Aquí puedes mostrar el contenido de following -->
+      <h2 class="text-xl mb-2">Siguiendo</h2>
+     <div class="flex flex-col gap-4 overflow-y-auto h-[calc(100%-2rem)]">
+        <div *ngFor="let rating of followingsRatings" class="flex gap-4 border rounded border-zinc-900 hover:bg-zinc-900/50 cursor-pointer p-4">
+          <div class="w-1/10">
+            <img src="https://image.tmdb.org/t/p/w500{{ rating?.movie_poster }}" class="rounded" >
+          </div>
+          <div class="w-9/10 flex flex-col gap-2">
+            <span class="text-sm hover:underline cursor-pointer" [routerLink]="['/user', rating.user_id]">{{'@' + rating.profile.username}}</span>
+            <span class="font-semibold hover:underline cursor-pointer" [routerLink]="['/movie', rating.movie_id]">{{rating.movie.original_title}}</span>
+            <p class="text-xs text-zinc-400">{{rating.critic}}</p>
+            <span class="mt-auto">{{rating.rating}}/10</span>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>

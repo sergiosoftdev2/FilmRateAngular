@@ -24,6 +24,7 @@ export class ExploreComponent {
   ) { }
   
   lastRatings: any[] = [];
+  followingsRatings: any[] = [];
   skipped = 0;
   activeTab: string = 'explore';
   isLoading = true;
@@ -40,11 +41,27 @@ export class ExploreComponent {
     if (tabName === 'explore') {
       this.getLastRatings();
     } else if (tabName === 'following') {
-      // Aquí puedes añadir la lógica para cargar los datos de 'following'
-      // Por ejemplo:
-      // this.apiService.getFollowingContent().subscribe((data: any) => {
-      //   this.followingContent = data;
-      // });
+
+      let followedUsers: string[] = [];
+
+      this.apiService.userFollowings(this.apiService.sessionGetter() as string).subscribe((data: any) => {
+        data.followings.forEach((following: any) => {
+          followedUsers.push(following.following_user_id);
+        })
+
+        this.apiService.getUsersRatings(followedUsers).subscribe((data: any) => {
+          this.followingsRatings = data.ratings;
+          this.followingsRatings.forEach((rating: any) => {
+            this.apiService.getProfile(rating.user_id).subscribe((profileData: any) => {
+              rating.profile = profileData;
+            });
+            this.apiService.getPelicula(rating.movie_id).subscribe((movieData: any) => {
+              rating.movie = movieData;
+            })
+          });
+        })
+
+      })
     }
   }
 
@@ -59,8 +76,6 @@ export class ExploreComponent {
           rating.movie = movieData;
         })
       });
-
-      console.log(this.lastRatings);
       this.isLoading = false;
     });
   }

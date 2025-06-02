@@ -33,6 +33,8 @@ export class userComponent {
     user:any;
     isSameUser:boolean = false;
     isAlreadyFollowing:boolean = false;
+    userFollowers: number = 0;
+    userFollowings: number = 0;
 
     ngOnInit() {
 
@@ -51,6 +53,8 @@ export class userComponent {
         this.apiService.getProfile(this.userId).subscribe((data: any) => {
             this.user = data;
             this.isUserFollowed();
+            this.followersCount();
+            this.followingsCount();
         })
 
         this.apiService.getUserRatings(this.userId).subscribe((data: any) => {
@@ -89,6 +93,18 @@ export class userComponent {
             if(data.following){
                 this.isAlreadyFollowing = true;
             }
+        })
+    }
+
+    followersCount(){
+        this.apiService.userFollowersCount(this.userId).subscribe((data: any) => {
+            this.userFollowers = data.followers;
+        })
+    }
+
+    followingsCount(){
+        this.apiService.userFollowingsCount(this.userId).subscribe((data: any) => {
+            this.userFollowings = data.followings;
         })
     }
 

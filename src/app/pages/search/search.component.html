@@ -1,6 +1,22 @@
+<div class="absolute z-[-1] w-[100dvw] h-[150dvh] overflow-hidden left-0 top-0">
+    <div 
+        class="absolute bg-red-500/50 size-32 top-10 left-16 blur-[100px] animate-pulse"
+        style="animation: pulse 3s infinite;"
+    ></div>
+    <div 
+        class="absolute bg-blue-500/50 size-64 top-0 right-0 blur-[200px]"
+        style="animation: pulse 5s infinite;"
+    ></div>
+    <div 
+        class="absolute bg-purple-500/50 size-64 bottom-0 blur-[200px]"
+        style="animation: pulse 10s infinite;"
+    ></div>
+</div>
+
+
 <input 
     type="text" 
-    class="searchContainer" 
+    class="border w-full text-sm p-2 rounded border-zinc-700" 
     placeholder="Buscar..." 
     [(ngModel)]="buscadorPeliculas"
     (input)="buscarPelicula()"

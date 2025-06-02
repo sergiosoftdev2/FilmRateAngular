@@ -1,4 +1,4 @@
-<div class="absolute z-[-1] w-[100dvw] h-[175dvh] overflow-hidden left-0 top-0">
+<div class="absolute z-[-1] w-[100dvw] h-[150dvh] overflow-hidden left-0 top-0">
     <div 
         class="absolute bg-red-500/50 size-32 top-10 left-16 blur-[100px] animate-pulse"
         style="animation: pulse 3s infinite;"
@@ -8,7 +8,7 @@
         style="animation: pulse 5s infinite;"
     ></div>
     <div 
-        class="absolute bg-purple-500/50 size-64 bottom-128 blur-[200px]"
+        class="absolute bg-purple-500/50 size-64 bottom-0 blur-[200px]"
         style="animation: pulse 10s infinite;"
     ></div>
 </div>
@@ -21,12 +21,14 @@
     <div class="profileInfo">
         <div style="display: flex; align-items: center; gap: 5px;">
             <h2>{{user.nombre + " " + user.apellidos}}</h2>
-            <div class="infoButtons">
-                <button class="infoProfileButton">
-                    <img src="/follow.png" alt="">
+            <div class="infoButtons" *ngIf="!isSameUser">
+                <button class="infoProfileButton" (click)="followUser()" *ngIf="!isAlreadyFollowing">
+                    Seguir
+                    <ng-icon [name]="'heroUserPlus'"></ng-icon>
                 </button>
-                <button class="infoProfileButton block">
-                    <img src="/block.png" alt="">
+                <button class="infoProfileButton !bg-white !text-black" (click)="unfollowUser()" *ngIf="isAlreadyFollowing">
+                    Siguiendo
+                    <ng-icon [name]="'heroUsersSolid'"></ng-icon>
                 </button>
             </div>
         </div>
@@ -37,20 +39,22 @@
 
 <div class="flex gap-2 mb-8">
     <tab 
-      [title]="'Últimos Críticas'" 
-      [active]="activeTab === 'Últimos Críticas'"
+      [title]="'Ratings'" 
+      [active]="activeTab === 'Ratings'"
       (tabClick)="setActiveTab($event)"
     ></tab>
     <tab 
-      [title]="'Siguiendo'" 
-      [active]="activeTab === 'Siguiendo'"
+      [title]="'Likes'" 
+      [active]="activeTab === 'Likes'"
       (tabClick)="setActiveTab($event)"
     ></tab>
   </div>
 
-<section class="mt-8">
-    <h2 class="font-bold text-xl">Películas Criticadas</h2>
-    <div class="corridor">
+<section class="mt-8" *ngIf="activeTab == 'Ratings'">
+    <div class="grid grid-cols-5 gap-4">
+        <div *ngIf="misPeliculasCriticadas.length == 0" class="col-span-5 flex justify-center">
+            <h2 class="text-xl font-bold">Try reviewing your first movie!</h2>
+        </div>
         <div class="movieCard" *ngFor="let pelicula of misPeliculasCriticadas">
             <img 
                 src="https://image.tmdb.org/t/p/w500/{{pelicula.movie_poster}}" 
@@ -61,9 +65,11 @@
     </div>
 </section>
 
-<section class="mt-8 text-xl">
-    <h2 class="font-bold">Películas Que Te Han Gustado</h2>
-    <div class="corridor">
+<section class="mt-8 text-xl" *ngIf="activeTab == 'Likes'">
+    <div *ngIf="misPeliculasGustadas.length == 0" class="col-span-5 flex justify-center">
+        <h2 class="text-xl font-bold">Try liking your first movie!</h2>
+    </div>
+    <div class="grid grid-cols-5 gap-4">
         <div class="movieCard" *ngFor="let pelicula of misPeliculasGustadas">
             <img 
                 src="https://image.tmdb.org/t/p/w500/{{pelicula.movie_poster}}" 

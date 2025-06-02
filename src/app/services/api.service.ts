@@ -127,6 +127,50 @@ export class ApiService {
     });
   }
 
+  // BBDD: FOLLOWS
+
+  public addFollow(following_id: string, follower_id: string) {
+    const url = `${this.privateAPIURL}/addFollow`;
+    return this.http.post(url, {
+      datosFollow: {following_user_id: following_id, follower_user_id: follower_id}
+    });
+  }
+
+  public removeFollow(following_id: string, follower_id: string) {
+    const url = `${this.privateAPIURL}/removeFollow`;
+    return this.http.post(url, {
+      datosFollow: {following_user_id: following_id, follower_user_id: follower_id}
+    });
+  }
+
+  public isUserFollowing(following_id: string, follower_id: string) {
+    const url = `${this.privateAPIURL}/user-following`;
+    return this.http.get(url, {
+      params: {
+        user_id: follower_id,
+        following_user_id: following_id
+      }
+    });
+  }
+
+  public userFollowers(user_id: string) {
+    const url = `${this.privateAPIURL}/user-followers`;
+    return this.http.get(url, {
+      params: {
+        user_id: user_id,
+      }
+    });
+  }
+
+  public userFollowings(user_id: string) {
+    const url = `${this.privateAPIURL}/user-followings`;
+    return this.http.get(url, {
+      params: {
+        user_id: user_id,
+      }
+    });
+  }
+
 
 
   // BBDD: USER RELATED

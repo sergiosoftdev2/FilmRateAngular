@@ -1,8 +1,8 @@
 <div 
     class="text-xs rounded py-1 px-2 cursor-pointer"
     [ngClass]="{
-        'bg-purple-300': !active,
-        'bg-purple-500': active
+        'bg-transparent border border-zinc-400 text-zinc-500': !active,
+        'bg-transparent border border-zinc-600 text-zinc-200': active
     }"
     (click)="onClick()"
 >

@@ -132,10 +132,10 @@ export class MovieComponent implements OnInit {
 
     this.apiService.addLike(datosLike).subscribe({
       next: () => {
-        console.log("HOLA")
         this.isLiked = true;
       },
-      error: () => {
+      error: (error) => {
+        console.log(error);
         this.isLiked = false;
       }
     })
@@ -150,7 +150,6 @@ export class MovieComponent implements OnInit {
 
     this.apiService.removeLike(datosLike).subscribe({
       next: () => {
-        console.log("HOLA")
         this.isLiked = false;
       },
       error: () => {

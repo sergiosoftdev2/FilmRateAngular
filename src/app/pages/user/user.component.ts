@@ -3,12 +3,16 @@ import { Component } from '@angular/core';
 import { ApiService } from '../../services/api.service';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { tabComponent } from '../../shared/components/tab/tab.component';
+import { NgIcon, provideIcons } from '@ng-icons/core';
+import { heroUserPlus } from '@ng-icons/heroicons/outline';
+import { heroUsersSolid } from '@ng-icons/heroicons/solid';
 
 @Component({
     selector: 'app-user',
-    imports: [CommonModule, RouterLink, tabComponent],
+    imports: [CommonModule, RouterLink, tabComponent, NgIcon],
     standalone: true,
     templateUrl: './user.component.html',
+    viewProviders: [provideIcons({heroUsersSolid, heroUserPlus})],
     styleUrls: ['./user.component.css']
 })
 
@@ -23,10 +27,12 @@ export class userComponent {
     misPeliculasCriticadas: any;
     misPeliculasGustadas: any;
 
-    activeTab: string = 'Últimos Críticas';
+    activeTab: string = 'Ratings';
 
     userId:string = "";
     user:any;
+    isSameUser:boolean = false;
+    isAlreadyFollowing:boolean = false;
 
     ngOnInit() {
 
@@ -36,6 +42,7 @@ export class userComponent {
             const session = this.apiService.sessionGetter();
             if (this.route.snapshot.paramMap.get('id') == null) {
                 this.userId = session as string;
+                this.isSameUser = true;
             }else{
                 this.userId = this.route.snapshot.paramMap.get('id') as string;
             }
@@ -43,6 +50,7 @@ export class userComponent {
 
         this.apiService.getProfile(this.userId).subscribe((data: any) => {
             this.user = data;
+            this.isUserFollowed();
         })
 
         this.apiService.getUserRatings(this.userId).subscribe((data: any) => {
@@ -50,19 +58,38 @@ export class userComponent {
         })
 
         this.apiService.getUserLikes(this.userId).subscribe((data: any) => {
-            this.misPeliculasGustadas = data.ratings;
+            this.misPeliculasGustadas = data.likedMovies;
+            this.misPeliculasGustadas.forEach((movie: any) => {
+                this.apiService.getPelicula(movie.movie_id).subscribe((data: any) => {
+                    movie.movie_poster = data.poster_path;
+                })
+            });
         })
 
-    }
-
-    getMovieInfo(movie_id: string): string {
-        this.apiService.getPelicula(movie_id).subscribe((data: any) => {
-            return data.poster_path;
-        })
-        return "";
     }
 
     setActiveTab(tabTitle: string) {
         this.activeTab = tabTitle;
     }
+
+    followUser(){
+        this.apiService.addFollow(this.userId, this.apiService.sessionGetter() as string).subscribe((data: any) => {
+            this.isAlreadyFollowing = true;
+        })
+    }
+
+    unfollowUser(){
+        this.apiService.removeFollow(this.userId, this.apiService.sessionGetter() as string).subscribe((data: any) => {
+            this.isAlreadyFollowing = false;
+        })
+    }
+
+    isUserFollowed(){
+        this.apiService.isUserFollowing(this.userId, this.apiService.sessionGetter() as string).subscribe((data: any) => {
+            if(data.following){
+                this.isAlreadyFollowing = true;
+            }
+        })
+    }
+
 }

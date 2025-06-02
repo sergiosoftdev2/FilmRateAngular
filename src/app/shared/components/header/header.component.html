@@ -4,8 +4,7 @@
     </div>
     <nav class="header-nav">
         <a routerLink="/explore" class="">Explore</a>
-        <a routerLink="/explore">New Movies</a>
-        <a routerLink="/explore">Top Rated</a>
+        <a routerLink="/search">Search</a>
     </nav>
     <nav>
         <a *ngIf="isLoggedIn" routerLink="/user" class="relative group icon headerIcon">
@@ -14,9 +13,9 @@
                 class="absolute top-full right-0 w-[300px] h-64  flex flex-col opacity-0 pointer-events-none 
                 group-hover:opacity-100 group-hover:pointer-events-auto pt-2"
             >
-                <div class="w-full h-full p-4 flex flex-col bg-black/50 rounded backdrop border border-zinc-800 rounded-md">
-                    <a routerLink="/user" class="px-2 py-1 hover:bg-zinc-700">Perfil</a>
-                    <a (click)="logOut()" class="px-2 py-1 hover:bg-zinc-700">Cerrar Sesión</a>
+                <div class="w-full h-full p-4 flex flex-col bg-black/80 rounded backdrop-blur-xl border border-zinc-800 rounded-md">
+                    <a routerLink="/user" class="px-2 py-1 hover:bg-white/10 rounded">Perfil</a>
+                    <a (click)="logOut()" class="px-2 py-1 hover:bg-white/10 rounded">Cerrar Sesión</a>
                 </div>
             </div>
         </a>

@@ -36,7 +36,7 @@
     <!-- Contenido condicional basado en la pestaña activa -->
     <div *ngIf="activeTab === 'explore'" class="flex flex-col gap-4 h-full">
       <!-- Contenido para la pestaña Explore -->
-      <h2 class="text-xl">Últimas críticas</h2>
+      <h2 class="text-xl">Last Reviews</h2>
       <div class="flex flex-col gap-4 overflow-y-auto h-[calc(100%-2rem)]">
         <div *ngFor="let rating of lastRatings" class="flex gap-4 border rounded border-zinc-900 hover:bg-zinc-900/50 cursor-pointer p-4">
           <div class="w-1/10">

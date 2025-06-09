@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ApiService } from '../../../services/api.service';
+import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
     selector: 'app-header',
@@ -16,6 +17,7 @@ export class headerComponent {
     
     constructor(
         private apiService: ApiService,
+        private cdr: ChangeDetectorRef
     ) { }
 
     @Input() titulo: string = "";
@@ -35,13 +37,16 @@ export class headerComponent {
     }
 
     ngOnInit() {
-        if(this.apiService.sessionGetter() !== null){
-            this.isLoggedIn = true;
-        }else{
-            this.isLoggedIn = false;
-        }
+        this.updateLoginStatus();
+    }
 
-        console.log(this.isLoggedIn);
+    ngOnChanges(){
+        this.updateLoginStatus();
+    }
+
+    updateLoginStatus() {
+        this.isLoggedIn = this.apiService.sessionGetter() !== null;
+        this.cdr.detectChanges();
     }
 
 }

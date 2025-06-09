@@ -26,6 +26,7 @@ export class userComponent {
 
     misPeliculasCriticadas: any;
     misPeliculasGustadas: any;
+    misPeliculasWatchList: any;
 
     activeTab: string = 'Ratings';
 
@@ -64,6 +65,15 @@ export class userComponent {
         this.apiService.getUserLikes(this.userId).subscribe((data: any) => {
             this.misPeliculasGustadas = data.likedMovies;
             this.misPeliculasGustadas.forEach((movie: any) => {
+                this.apiService.getPelicula(movie.movie_id).subscribe((data: any) => {
+                    movie.movie_poster = data.poster_path;
+                })
+            });
+        })
+
+        this.apiService.getUserWatchListedMovies(this.userId).subscribe((data: any) => {
+            this.misPeliculasWatchList = data.watchlistMovies;
+            this.misPeliculasWatchList.forEach((movie: any) => {
                 this.apiService.getPelicula(movie.movie_id).subscribe((data: any) => {
                     movie.movie_poster = data.poster_path;
                 })

@@ -44,8 +44,21 @@
                     *ngIf="!isAlreadyRated"
                 >Añadir Crítica</button>
                 <button
-                    class="bg-zinc-800/50 p-2 grow rounded-md border border-zinc-600 text-sm cursor-pointer"
-                >Añadir a Watchlist</button>
+                    (click)="addWatchlist()"
+                    *ngIf="!isWatchlisted"
+                    class="bg-zinc-800/50 p-2 grow rounded-md border border-zinc-600 text-sm cursor-pointer flex items-center justify-center gap-2"
+                >
+                    <ng-icon name="heroEye"></ng-icon>
+                    Añadir a Watchlist
+                </button>
+                <button
+                    (click)="removeWatchlist()"
+                    *ngIf="isWatchlisted"
+                    class="bg-zinc-800/50 p-2 grow rounded-md border border-zinc-600 text-sm cursor-pointer flex items-center justify-center gap-2"
+                >
+                    <ng-icon name="heroEyeSolid"></ng-icon>
+                    Quitar de mi Watchlist
+                </button>
                 <button 
                     *ngIf="!isLiked"
                     class="bg-red-700 border border-red-500 p-2 h-10 w-10 rounded flex items-center justify-center"

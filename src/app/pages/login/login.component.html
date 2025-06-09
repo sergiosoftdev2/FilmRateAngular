@@ -21,14 +21,30 @@
         <div class="half">
             <label for="" class="label">
                 Correo Electrónico:
-                <input type="email" class="input" [(ngModel)]="email">
+                <input 
+                    type="email" 
+                    class="input" 
+                    [(ngModel)]="email"
+                    [ngClass]="{
+                        'border !border-red-500' : passwordError
+                    }"
+                >
             </label>
             <label for="" class="label">
                 Contraseña:
-                <input type="password" class="input" (keydown.enter)="login()" [(ngModel)]="password">
+                <input 
+                    type="password" 
+                    class="input" 
+                    (keydown.enter)="login()" 
+                    [(ngModel)]="password"
+                    [ngClass]="{
+                        'border !border-red-500' : passwordError
+                    }"
+                >
             </label>
         </div>
     </div>
+    <label *ngIf="passwordError" class="text-red-500 text-left">Wrong Password/Mail</label>
 
     <div class="buttons">
         <button class="border border-zinc-800 bg-zinc-200 text-zinc-900" (click)="login()">Iniciar Sesión</button>

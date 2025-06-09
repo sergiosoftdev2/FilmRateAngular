@@ -23,6 +23,7 @@ export class loginComponent {
 
     public password: string = "";
     public email: string = "";
+    public passwordError: boolean = false;
 
     ngOnInit() {
         if(this.apiService.sessionGetter() !== null){
@@ -38,6 +39,7 @@ export class loginComponent {
             },
             (error) => {
                 console.error('Error en el login:', error);
+                this.passwordError = true;
             }
         );
     }

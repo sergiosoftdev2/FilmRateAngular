@@ -136,6 +136,40 @@ export class ApiService {
     });
   }
 
+  // BBDD: Wathclist
+  public addWatchList(datosWatchList: any) {
+    const url = `${this.privateAPIURL}/addWatchlist`;
+    return this.http.post(url, {
+      datosWatchList: datosWatchList
+    });
+  }
+
+  public removeWatchList(datosWatchList: any) {
+    const url = `${this.privateAPIURL}/removeWatchlist`;
+    return this.http.post(url, {
+      datosWatchList: datosWatchList
+    });
+  }
+  
+  public getUserWatchListMovie(user_id: string, movie_id: string) {
+    const url = `${this.privateAPIURL}/user-watchlist-movie`;
+    return this.http.get(url, {
+      params: {
+        user_id: user_id,
+        movie_id: movie_id
+      }
+    });
+  }
+
+  public getUserWatchListedMovies(user_id: string) {
+    const url = `${this.privateAPIURL}/user-watchlist-movies`;
+    return this.http.get(url, {
+      params: {
+        user_id: user_id,
+      }
+    });
+  }
+
   // BBDD: FOLLOWS
 
   public addFollow(following_id: string, follower_id: string) {

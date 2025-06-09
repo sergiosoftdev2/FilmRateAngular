@@ -6,14 +6,14 @@ import { Rating } from '../../services/models/rating.model';
 import { FormsModule } from '@angular/forms';
 
 import { NgIcon, provideIcons } from '@ng-icons/core';
-import { heroHeart } from '@ng-icons/heroicons/outline';
-import { heroHeartSolid } from '@ng-icons/heroicons/solid';
+import { heroEye, heroHeart } from '@ng-icons/heroicons/outline';
+import { heroEyeSolid, heroHeartSolid } from '@ng-icons/heroicons/solid';
 
 @Component({
   selector: 'app-movie',
   standalone: true,
   imports: [CommonModule, FormsModule, NgIcon],
-  viewProviders: [provideIcons({heroHeart, heroHeartSolid})],
+  viewProviders: [provideIcons({heroHeart, heroHeartSolid, heroEye, heroEyeSolid})],
   templateUrl: './movie.component.html',
   styleUrls: ['./movie.component.css']
 })
@@ -33,6 +33,7 @@ export class MovieComponent implements OnInit {
 
   isAlreadyRated: boolean = false;
   isLiked: boolean = false;
+  isWatchlisted: boolean = false;
 
   constructor(
     private apiService: ApiService,
@@ -45,7 +46,7 @@ export class MovieComponent implements OnInit {
 
     if (!this.userId) {
       console.error('No se pudo obtener userId');
-      this.isLoading = false;
+      this.isLoading = true;
       this.isLoggedIn = false;
     }else{
         this.isLoggedIn = true;
@@ -56,6 +57,7 @@ export class MovieComponent implements OnInit {
         this.movie = data;
         this.checkUserRating();
         this.checkUserLiked();
+        this.checkUserWatchlist();
       },
       error: (error) => {
         console.error('Error al obtener la película:', error);
@@ -90,6 +92,18 @@ export class MovieComponent implements OnInit {
     this.apiService.getUserLike(this.userId, this.movieId).subscribe({
       next: () => {
         this.isLiked = true;
+      },
+      error: () => {
+        this.isLiked = false;
+      }
+    })
+  }
+
+  private checkUserWatchlist(): void {
+    if (!this.userId ||!this.movieId) return;
+    this.apiService.getUserWatchListMovie(this.userId, this.movieId).subscribe({
+      next: () => {
+        this.isWatchlisted = true;
       },
       error: () => {
         this.isLiked = false;
@@ -157,4 +171,35 @@ export class MovieComponent implements OnInit {
       }
     })
   }
+
+  public addWatchlist(): void{
+    let datosWatchlist = {
+      user_id: this.userId,
+      movie_id: this.movieId
+    }
+    this.apiService.addWatchList(datosWatchlist).subscribe({
+      next: () => {
+        this.isWatchlisted = true;
+      },
+      error: () => {
+        this.isWatchlisted = false;
+      }
+    })
+  }
+
+  public removeWatchlist(): void{
+    let datosWatchlist = {
+      user_id: this.userId,
+      movie_id: this.movieId
+    }
+    this.apiService.removeWatchList(datosWatchlist).subscribe({
+      next: () => {
+        this.isWatchlisted = false;
+      },
+      error: () => {
+        this.isWatchlisted = true;
+      }
+    })
+  }
+
 }

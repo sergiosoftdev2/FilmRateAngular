@@ -56,6 +56,11 @@
       [active]="activeTab === 'Likes'"
       (tabClick)="setActiveTab($event)"
     ></tab>
+    <tab 
+      [title]="'Watchlist'" 
+      [active]="activeTab === 'Watchlist'"
+      (tabClick)="setActiveTab($event)"
+    ></tab>
   </div>
 
 <section class="mt-8" *ngIf="activeTab == 'Ratings'">
@@ -79,6 +84,21 @@
     </div>
     <div class="grid grid-cols-5 gap-4">
         <div class="movieCard" *ngFor="let pelicula of misPeliculasGustadas">
+            <img 
+                src="https://image.tmdb.org/t/p/w500/{{pelicula.movie_poster}}" 
+                alt=""
+                routerLink="/movie/{{pelicula.movie_id}}"
+            >
+        </div>
+    </div>
+</section>
+
+<section class="mt-8 text-xl" *ngIf="activeTab == 'Watchlist'">
+    <div *ngIf="!misPeliculasWatchList" class="col-span-5 flex justify-center">
+        <h2 class="text-xl font-bold">Try liking your first movie!</h2>
+    </div>
+    <div class="grid grid-cols-5 gap-4">
+        <div class="movieCard" *ngFor="let pelicula of misPeliculasWatchList">
             <img 
                 src="https://image.tmdb.org/t/p/w500/{{pelicula.movie_poster}}" 
                 alt=""
